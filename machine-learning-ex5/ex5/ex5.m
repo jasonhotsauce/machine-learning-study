@@ -218,3 +218,20 @@ end
 
 fprintf('Program paused. Press enter to continue.\n');
 pause;
+
+lambda = 3;
+[theta] = trainLinearReg(X_poly, y, lambda);
+[error_test, _] = linearRegCostFunction(X_poly_test, ytest, theta, 0);
+fprintf(['test error is %f (lambda = %f)\n'], error_test, lambda);
+pause;
+
+lambda = 0.01;
+[error_train, error_val] = ...
+    learningCurveRand(X_poly, y, X_poly_val, yval, lambda, 50);
+plot(1:m, error_train, 1:m, error_val);
+itle(sprintf('Polynomial Regression Learning Curve (lambda = %f)', lambda));
+xlabel('Number of training examples')
+ylabel('Error')
+axis([0 13 0 100])
+legend('Train', 'Cross Validation')
+pause;
