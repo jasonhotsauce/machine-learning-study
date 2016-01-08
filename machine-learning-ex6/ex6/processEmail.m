@@ -54,6 +54,8 @@ fprintf('\n==== Processed Email ====\n\n');
 % Process file
 l = 0;
 
+vocLength = length(vocabList);
+
 while ~isempty(email_contents)
 
     % Tokenize and also get rid of any punctuation
@@ -96,7 +98,11 @@ while ~isempty(email_contents)
     % Note: You can use strcmp(str1, str2) to compare two strings (str1 and
     %       str2). It will return 1 only if the two strings are equivalent.
     %
-
+    for i = 1:vocLength
+        if strcmp(str, vocabList{i})
+            word_indices = [word_indices; i];
+        end
+    end
 
 
 
